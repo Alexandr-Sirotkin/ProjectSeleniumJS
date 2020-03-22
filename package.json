@@ -1,0 +1,19 @@
+{
+  "name": "projectseleniumjs",
+  "version": "1.0.0",
+  "description": "test framework for Yandex mail ",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "test": "mocha"
+  },
+  "author": "Sirotkin Alexandr",
+  "license": "ISC",
+  "dependencies": {
+    "chromedriver": "^80.0.1",
+    "selenium-webdriver": "^4.0.0-alpha.7"
+  },
+  "devDependencies": {
+    "mocha": "^7.1.1"
+  }
+}
