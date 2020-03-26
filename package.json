@@ -2,10 +2,10 @@
   "name": "projectseleniumjs",
   "version": "1.0.0",
   "description": "test framework for Yandex mail ",
-  "main": "index.js",
+  "main": "driver.js",
   "scripts": {
     "start": "node index",
-    "test": "mocha"
+    "test": ""
   },
   "author": "Sirotkin Alexandr",
   "license": "ISC",

@@ -1,30 +1,32 @@
 
-let User = require("./model/User.js");
-let user = new User();
-console.log(user.correctLogin);
+"use strict";
+let Page = require("./pages/LoginPage.js");
+//let assert = require("assert");
+let page;
+//let expectedHeadingLoginPage = "logo:yandex";
 
 
-// const { Builder } = require("selenium-webdriver");
-// const path = require('chromedriver').path;
-// const driver = new Builder().forBrowser("chrome").build();
-// driver.get('http://en.wikipedia.org/wiki/Wiki');
 
-var webdriver = require('selenium-webdriver'),
-    chromeDriver = require('selenium-webdriver/chrome'),
-    By = require('selenium-webdriver').By,
-    until = require('selenium-webdriver').until;
+async function f() {
+    page = new Page();
+    console.log("Hello1");
+    await page.visit("https://passport.yandex.ru/auth/welcome");
+    console.log("Hello2");
+    let heading = await page.getHeadingText();
+    console.log("Hello");
+    console.log(heading);
+};
 
-const path = require('chromedriver').path;
+f();
 
-var options = new chromeDriver.Options();
-options.addArguments('start-maximized');
-options.addArguments('incognito');
-options.setUserPreferences({ 'download.default_directory': '/path/to/your/download/directory' });
+    // it("log in test", async function () {
 
-var driver = new webdriver.Builder()
-    .withCapabilities(webdriver.Capabilities.chrome())
-    .forBrowser('chrome')
-    .setChromeOptions(options)
-    .build();
+    //     await driver.get("https://passport.yandex.ru/auth/welcome");
+    //     let headingLocator = await By.xpath("//a[contains(@class,'logo logo_name')]");
+    //     let heading = await driver.findElement(By.xpath(headingLocator));
+    //      let heading = await driver.findElement(webdriver.By.xpath("//a[contains(@class,'logo logo_name')]")).getText();
+    //      console.log("Hello");
+    //      console.log(heading);
+    //       assert.equal(heading, expectedHeadingLoginPage, "The expected LoginPage page title does not match the current one.");
+    //  });
 
-driver.get('http://en.wikipedia.org/wiki/Wiki');
