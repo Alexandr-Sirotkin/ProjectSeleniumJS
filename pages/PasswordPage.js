@@ -13,7 +13,7 @@ let webdriver = require('selenium-webdriver'),
 let HEADING_LOCATOR = "//div[@class='passp-auth-header']/a[2]";
 
 
-passwordPage.prototype.getHeadingText1 = async function (driver) {
+passwordPage.prototype.getHeadingText1 = async function () {
     // console.log("message");
     // console.log("message");
     // let r = await driver.findElement(By.xpath("//h1['passp-title ']/span")).getText();

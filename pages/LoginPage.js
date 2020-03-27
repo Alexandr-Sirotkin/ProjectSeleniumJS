@@ -18,48 +18,14 @@ Page.prototype.clickLogInButton = function () {
     return this.find(LOG_IN_BUTTON_LOCATOR).click();
 }
 
-Page.prototype.getErrorTextLogin = async function () {
-    await this.sleep(1000);
+Page.prototype.getErrorTextLogin = function () {
     return this.find(ERROR_LOGIN_LOCATOR).getText();
 }
+
+
 
 Page.prototype.getHeadingText = function () {
     return this.find(HEADING_LOCATOR).getText();
 }
-
-
-Page.prototype.invalidLoginCreation = function (text) {
-    this.write(LOGIN_FIELD_LOCATOR, text);
-    this.clickLogInButton();
-}
-
-Page.prototype.logIn = async function (text, driver) {
-    this.write(LOGIN_FIELD_LOCATOR, text);
-    this.clickLogInButton();
-    await this.sleep(1000);
-    return new pasPage(driver);
-}
-
-// this.typeUserLogin = async function (userLogin) {
-//     console.log("00000000000000000000");
-//     let loginField = await loginPage.findLoginField();
-//     console.log("11111111111111111111");
-//     await loginField.clear;
-//     console.log("222222222222222222222222");
-//     await loginField.sendKeys("userLogin");
-//     console.log("333333333333333333333333");
-// }
-
-// this.logInEmptyLogin = async function (element, text) {
-//     await this.write(element, text);
-//     console.log("1111111111111111");
-//     loginPage.clickLogInButton;
-//     console.log("22222222222222222222");
-
-// }
-
-
-
-
 
 module.exports = Page;
