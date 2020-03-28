@@ -1,13 +1,7 @@
 "use strict";
 
-
-
-
-
 let webdriver = require('selenium-webdriver'),
     chromeDriver = require('selenium-webdriver/chrome'),
-    By = require('selenium-webdriver').By,
-    until = require('selenium-webdriver').until,
     path = require('chromedriver').path,
     options = new chromeDriver.Options();
 options.addArguments('start-maximized');
@@ -20,8 +14,6 @@ let driver = new webdriver.Builder()
     .build();
 
 driver.manage().setTimeouts({ implicit: 20000, pageLoad: 10000 });
-
-
 
 
 module.exports = driver;

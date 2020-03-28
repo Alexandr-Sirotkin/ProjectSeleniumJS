@@ -42,7 +42,7 @@ describe("LoginPage page tests", function () {
     it("Correct Login Test", async function () {
         await service.logIn(user.correctLogin);
         let heading = await service.getHeadingTextPasswordPage();
-        assert.equal(heading, EXPECTED_HEADING_PASSWORD_PAGE, "A test with an incorrect login behaves incorrectly.");
+        assert.equal(heading, EXPECTED_HEADING_PASSWORD_PAGE, "A test with a correct login behaves incorrectly.");
     });
 
 }
