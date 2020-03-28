@@ -1,15 +1,17 @@
-
 "use strict";
-
 let user = require("../model/user.js");
+let letter = require("../model/letter.js");
 let servicePage = require("../service/TransitionService.js");
 let service = new servicePage();
 let assert = require("assert");
 
-const EXPECTED_HEADING_LOGIN_PAGE = "logo:yandex",
-    EXPECTED_ERROR_TEXT_EMPTY_LOGIN = "Логин не указан",
-    EXPECTED_ERROR_TEXT_LOGIN = "Такой логин не подойдет",
-    EXPECTED_HEADING_PASSWORD_PAGE = "Другой аккаунт";
+const EXPECTED_HEADING_LETTER_PAGE = "Отправить",
+    EXPECTED_HEADING_SENT_MESSAGE_WINDOW_PAGE = "Письмо отправлено.",
+    EXPECTED_ADDRESS_SENT_LETTER = user.emailAddress,
+    EXPECTED_USER_INCOMING_LETTER = user.userName,
+    EXPECTED_TOPIC_SENT_LETTER = letter.topicCorrectRecipient,
+    EXPECTED_TOPIC_INCOMING_LETTER = letter.topicCorrectRecipient,
+    EXPECTED_ERROR_ADDRESS_TEXT = "Некорректные адреса: " + letter.invalidRecipient;
 
 describe("LoginPage page tests", function () {
     this.timeout(15000);

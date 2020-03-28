@@ -12,6 +12,8 @@ let UmmPage = require("../pages/UserMailMainPage.js");
 let ummPage;
 let MailPage = require("../pages/MailPage.js");
 let mailPage;
+let LetterPage = require("../pages/LetterPage.js");
+let letterPage;
 
 
 let Page = class ServicePage {
@@ -29,6 +31,11 @@ let Page = class ServicePage {
     async openBrowserForUserMailMainPage() {
         await this.openBrowserForPasswordPage();
         await this.logInWithPassword(user.correctPassword);
+    }
+
+    async openBrowserForMailPage() {
+        await this.openBrowserForUserMailMainPage();
+        await this.goToMail();
     }
 
     getHeadingTextLoginPage() {
@@ -88,6 +95,11 @@ let Page = class ServicePage {
         return mailPage = new MailPage(driver);
     }
 
+    async writeLetter() {
+        await mailPage.writeLetter();
+        return letterPage = new LetterPage(driver);
+    }
+
     async getHeadingTextPasswordPage() {
         return await passwordPage.getHeadingText();
     }
@@ -98,6 +110,10 @@ let Page = class ServicePage {
 
     async getHeadingTextMailPage() {
         return await mailPage.getHeadingText();
+    }
+
+    getHeadingTextLetterPage() {
+        return letterPage.getHeadingText();
     }
 
     quit() {

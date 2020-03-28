@@ -19,8 +19,6 @@ let Page = class UserMailMainPage extends BasePage {
     clickMailButton() {
         return this.find(MAIL_BUTTON_LOCATOR).click();
     }
-
-
 };
 
 module.exports = Page;

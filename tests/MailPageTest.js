@@ -4,15 +4,15 @@ let servicePage = require("../service/TransitionService.js");
 let service = new servicePage();
 let assert = require("assert");
 
-const EXPECTED_HEADING_USER_MAIL_MAIN_PAGE = "Сироткин",
+const EXPECTED_HEADING_LETTER_PAGE = "Отправить",
     EXPECTED_HEADING_MAIL_PAGE = "Входящие";
 
 
-describe("UserMailMainPage page tests", function () {
+describe("MailPage page tests", function () {
     this.timeout(15000);
 
     before(async function () {
-        await service.openBrowserForUserMailMainPage();
+        await service.openBrowserForMailPage();
     });
 
     after(function () {
@@ -20,14 +20,14 @@ describe("UserMailMainPage page tests", function () {
     });
 
     it("Page check", async function () {
-        let heading = await service.getHeadingTextUmmPage();
-        assert.equal(heading, EXPECTED_HEADING_USER_MAIL_MAIN_PAGE, "The expected UserMailMainPage page title does not match the current one.");
-    });
-
-    it("Go to mail Test", async function () {
-        await service.goToMail();
         let heading = await service.getHeadingTextMailPage();
         assert.equal(heading, EXPECTED_HEADING_MAIL_PAGE, "The expected page title does not match the current one.");
+    });
+
+    it("Write a letter Test", async function () {
+        await service.writeLetter();
+        let heading = await service.getHeadingTextLetterPage();
+        assert.equal(heading, EXPECTED_HEADING_LETTER_PAGE, "The expected page title does not match the current one.");
     });
 
 });
