@@ -1,100 +1,42 @@
 "use strict";
 
 
+let By = require('selenium-webdriver').By,
+    until = require('selenium-webdriver').until;
 
-let webdriver = require('selenium-webdriver'),
-    chromeDriver = require('selenium-webdriver/chrome'),
-    By = require('selenium-webdriver').By,
-    until = require('selenium-webdriver').until,
-    Key = require('selenium-webdriver').Key,
-    path = require('chromedriver').path;
-//     options = new chromeDriver.Options();
-// options.addArguments('start-maximized');
-// options.addArguments('incognito');
+let Page = class BasePage {
 
-
-
-
-let BasePage = function (driver) {
-
-
-
-    this.driver = driver;
-
-    // let driver = new webdriver.Builder()
-    //     .withCapabilities(webdriver.Capabilities.chrome())
-    //     .forBrowser('chrome')
-    //     .setChromeOptions(options)
-    //     .build();
-
-
-
-
-
-
-    this.visit = function (url) {
-        return driver.get(url);
+    constructor(driver) {
+        this.driver = driver;
     }
 
-    this.quit = function () {
-        return driver.quit();
+    visit(url) {
+        return this.driver.get(url);
     }
 
-    this.find = function (element) {
-        driver.wait(until.elementLocated(By.xpath(element)), 5000);
-        return driver.findElement(By.xpath(element));
+    quit() {
+        return this.driver.quit();
     }
 
-    this.finda = async function (element) {
-        let elem = await driver.wait(until.elementLocated(By.xpath(element)), 55000);
-        return elem;
+    find(element) {
+        this.driver.wait(until.elementLocated(By.xpath(element)), 5000);
+        return this.driver.findElement(By.xpath(element));
     }
 
-
-    // this.waitElement = async function (element) {
-    //     let displayed = false;
-    //     let count = 0;
-    //     do {
-    //         try {
-    //             displayed = driver.findElement(element).isDisplayed();
-    //         } catch (err) {
-    //             if (count > 20000) {
-    //                 displayed = true;
-    //             }
-    //             count++;
-    //             console.log(count);
-    //         }
-    //     } while (!displayed);
-    // }
-
-
-
-
-    this.sleep = function (ms) {
+    sleep(ms) {
         return new Promise(resolve => setTimeout(resolve, ms));
     }
 
-
-
-
-
-
-
-    this.findAll = function (element) {
-        driver.wait(until.elementLocated(By.xpath(element)), 5000);
-        return driver.findElements(By.xpath(element));
+    findAll(element) {
+        this.driver.wait(until.elementLocated(By.xpath(element)), 5000);
+        return this.driver.findElements(By.xpath(element));
     }
 
-    this.write = function (element, text) {
-        // this.find(element).clear();
-        this.find(element).sendKeys(webdriver.Key.CONTROL, Key.HOME);
-        this.find(element).sendKeys(webdriver.Key.CONTROL, Key.SHIFT, Key.END);
+    write(element, text) {
+        this.find(element).clear();
         return this.find(element).sendKeys(text);
     }
+};
 
+module.exports = Page;
 
-
-
-}
-
-module.exports = BasePage;

@@ -1,8 +1,6 @@
 
 "use strict";
 
-
-
 let user = require("../model/user.js");
 let servicePage = require("../service/TransitionService.js");
 let service = new servicePage();
@@ -12,9 +10,6 @@ const EXPECTED_HEADING_LOGIN_PAGE = "logo:yandex";
 const EXPECTED_ERROR_TEXT_EMPTY_LOGIN = "Логин не указан";
 const EXPECTED_ERROR_TEXT_LOGIN = "Такой логин не подойдет";
 const EXPECTED_HEADING_PASSWORD_PAGE = "Другой аккаунт";
-
-
-
 
 describe("LoginPage page tests", function () {
     this.timeout(15000);
@@ -47,10 +42,8 @@ describe("LoginPage page tests", function () {
     it("Correct Login Test", async function () {
         await service.logIn(user.correctLogin);
         let heading = await service.getHeadingTextPasswordPage();
-        console.log(heading);
         assert.equal(heading, EXPECTED_HEADING_PASSWORD_PAGE, "A test with an incorrect login behaves incorrectly.");
     });
-
 
 }
 
