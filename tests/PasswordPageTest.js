@@ -41,7 +41,7 @@ describe("PasswordPage page tests", function () {
     it("Correct log in Test", async function () {
         await service.logInWithPassword(user.correctPassword);
         let heading = await service.getHeadingTextUmmPage();
-        assert.equal(heading, EXPECTED_HEADING_USER_MAIL_MAIN_PAGE, "A test with a correct password behaves incorrectly.");
+        assert.equal(heading, EXPECTED_HEADING_USER_MAIL_MAIN_PAGE, "The expected page title does not match the current one.");
     });
 
 }
