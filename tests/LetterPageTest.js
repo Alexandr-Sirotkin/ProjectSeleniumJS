@@ -14,7 +14,7 @@ const EXPECTED_HEADING_LETTER_PAGE = "Отправить",
     EXPECTED_ERROR_ADDRESS_TEXT = "Некорректные адреса: " + letter.invalidRecipient;
 
 describe("LoginPage page tests", function () {
-    this.timeout(20000);
+    this.timeout(25000);
 
     before(async function () {
         await service.openBrowserLetterPage();
@@ -35,18 +35,24 @@ describe("LoginPage page tests", function () {
         assert.equal(heading, EXPECTED_HEADING_SENT_MESSAGE_WINDOW_PAGE, "The expected page title does not match the current one.");
     });
 
-
-
-    it("Check Sent emails", async function () {
+    it("Check sent emails", async function () {
         await service.clickSendLettersFolderService();
         let topic = await service.getTopicSentLetterService();
         assert.equal(topic, EXPECTED_TOPIC_SENT_LETTER, "The expected page title does not match the current one.");
     });
 
-    // it("Correct Login Test", async function () {
-    //     await service.logIn(user.correctLogin);
-    //     let heading = await service.getHeadingTextPasswordPage();
-    //     assert.equal(heading, EXPECTED_HEADING_PASSWORD_PAGE, "A test with a correct login behaves incorrectly.");
-    // });
+    it("Check inbox emails", async function () {
+        await service.clickInboxLettersFolderService();
+        await service.refreshInboxPage(letter.topicCorrectRecipient);
+        let topic = await service.getTopicIncomingLetterService();
+        assert.equal(topic, EXPECTED_TOPIC_INCOMING_LETTER, "The expected page title does not match the current one.");
+    });
+
+    it("Checking for an invalid address error", async function () {
+        await service.writeLetterFromInbox();
+        await service.sendLetterWithInvalidAddressService(letter.invalidRecipient, letter.topicCorrectRecipient, letter.bodyCorrectRecipient);
+        let error = await service.getErrorAddressTextService();
+        assert.equal(error, EXPECTED_ERROR_ADDRESS_TEXT, "The expected error does not match the current one.");
+    });
 
 });

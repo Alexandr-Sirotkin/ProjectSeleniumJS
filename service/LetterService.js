@@ -40,13 +40,13 @@ let Page = class LetterService extends servicePage {
     async writeRecipientService(recipient) {
         let recipientField = await letterPage.findRecipientField();
         recipientField.clear();
-        recipientField.sendKeys(recipient);
+        await recipientField.sendKeys(recipient);
     }
 
     async writeTopicService(topic) {
         let topicField = await letterPage.findTopicField();
         topicField.clear();
-        topicField.sendKeys(topic);
+        await topicField.sendKeys(topic);
     }
 
     async writeBodyService(body) {
@@ -63,6 +63,13 @@ let Page = class LetterService extends servicePage {
         return smwPage = new SentMessageWindowPage(driver);
     }
 
+    async sendLetterWithInvalidAddressService(recipient, topic, body) {
+        await this.writeRecipientService(recipient);
+        await this.writeTopicService(topic);
+        await this.writeBodyService(body);
+        await letterPage.clickSendButton();
+    }
+
     getHeadingTextSentMessageWindowPage() {
         return smwPage.getHeadingText();
     }
@@ -72,8 +79,8 @@ let Page = class LetterService extends servicePage {
         return sentPage = new SentEmailsPage(driver);
     }
 
-    clickInboxLettersFolderService() {
-        letterPage.clickInboxLettersFolder();
+    async clickInboxLettersFolderService() {
+        await letterPage.clickInboxLettersFolder();
         return inboxPage = new IncomingEmailsPage(driver);
     }
 
@@ -91,9 +98,26 @@ let Page = class LetterService extends servicePage {
         return await sentPage.getTopicLetter();
     }
 
+    async getTopicIncomingLetterService() {
+        return await inboxPage.getTopicLetter();
+    }
 
+    async getTopicLetterLocator() {
+        return await inboxPage.getTopicLetterLocator();
+    }
 
+    async refreshInboxPage(element) {
+        await inboxPage.refresh("//span[@title=\'" + element + "\']");
+    }
 
+    async writeLetterFromInbox() {
+        await inboxPage.writeLetter();
+        return letterPage = new LetterPage(driver);
+    }
+
+    getErrorAddressTextService() {
+        return letterPage.getErrorAddressText();
+    }
 
 }
 module.exports = Page;

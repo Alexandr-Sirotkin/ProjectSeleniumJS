@@ -19,7 +19,7 @@ let Page = class BasePage {
     }
 
     find(element) {
-        this.driver.wait(until.elementLocated(By.xpath(element)), 5000);
+        this.driver.wait(until.elementLocated(By.xpath(element)), 1000);
         return this.driver.findElement(By.xpath(element));
     }
 
@@ -28,7 +28,7 @@ let Page = class BasePage {
     }
 
     findAll(element) {
-        this.driver.wait(until.elementLocated(By.xpath(element)), 5000);
+        this.driver.wait(until.elementLocated(By.xpath(element)), 1000);
         return this.driver.findElements(By.xpath(element));
     }
 
@@ -36,6 +36,24 @@ let Page = class BasePage {
         this.find(element).clear();
         return this.find(element).sendKeys(text);
     }
+
+    refresh(element) {
+        let displayed = false;
+        let count = 0;
+        do {
+            try {
+                // displayed = this.find(element);
+                displayed = this.driver.findElement(By.xpath(element));
+            } catch (err) {
+                this.driver.navigate().refresh();
+                if (count > 6) {
+                    displayed = true;
+                }
+                count++;
+            }
+        } while (!displayed);
+    }
+
 };
 
 module.exports = Page;

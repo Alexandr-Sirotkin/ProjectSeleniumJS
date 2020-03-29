@@ -13,7 +13,7 @@ let driver = new webdriver.Builder()
     .setChromeOptions(options)
     .build();
 
-driver.manage().setTimeouts({ implicit: 20000, pageLoad: 10000 });
+driver.manage().setTimeouts({ implicit: 6000, pageLoad: 6000 });
 
 
 module.exports = driver;
