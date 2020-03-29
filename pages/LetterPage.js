@@ -11,7 +11,7 @@ const RECIPIENT_FIELD_LOCATOR = "//div[@class='mail-Compose-Field-Input']/div[@n
     LINK_TO_DRAFTS_LOCATOR = "//a[contains(@title,'Черновики')]",
     WRITE_BUTTON_LOCATOR = "//a[@title='Написать (w, c)']",
     SAVE_AND_GO_BUTTON_LOCATOR = "//button[contains(@class,' nb-button _nb-small-action-button')]",
-    HEADING_LOCATOR = "//div[@class='ComposeSendButton-Text']/span";
+    HEADING_LOCATOR = "//button[@type='submit']//span[@class='_nb-button-text']";
 
 
 let Page = class LetterPage extends BasePage {
@@ -20,8 +20,8 @@ let Page = class LetterPage extends BasePage {
         return this.find(HEADING_LOCATOR).getText();
     }
 
-    findRecipientField() {
-        return this.find(RECIPIENT_FIELD_LOCATOR);
+    async findRecipientField() {
+        return await this.find(RECIPIENT_FIELD_LOCATOR);
     }
 
     findTopicField() {
@@ -29,6 +29,7 @@ let Page = class LetterPage extends BasePage {
     }
 
     findBodyField() {
+        console.log(6666);
         return this.find(BODY_FIELD_LOCATOR);
     }
 
