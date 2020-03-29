@@ -17,6 +17,18 @@ let LetterPage = require("../pages/LetterPage.js");
 let letterPage;
 let SentMessageWindowPage = require("../pages/SentMessageWindowPage.js");
 let smwPage;
+let SentEmailsPage = require("../pages/SentEmailsPage.js");
+let sentPage;
+let IncomingEmailsPage = require("../pages/IncomingEmailsPage.js");
+let inboxPage;
+let DeletedLettersPage = require("../pages/DeletedLettersPage.js");
+let deletedLetters;
+let DraftsPage = require("../pages/DraftsPage.js");
+let draft;
+
+
+
+
 
 let Page = class LetterService extends servicePage {
 
@@ -39,11 +51,8 @@ let Page = class LetterService extends servicePage {
 
     async writeBodyService(body) {
         let bodyField = await letterPage.findBodyField();
-        console.log(7777);
         bodyField.clear();
-        console.log(12121212);
         await bodyField.sendKeys(body);
-        console.log(222222222);
     }
 
     async sendLetterService(recipient, topic, body) {
@@ -57,6 +66,32 @@ let Page = class LetterService extends servicePage {
     getHeadingTextSentMessageWindowPage() {
         return smwPage.getHeadingText();
     }
+
+    async clickSendLettersFolderService() {
+        await letterPage.clickSendLettersFolder();
+        return sentPage = new SentEmailsPage(driver);
+    }
+
+    clickInboxLettersFolderService() {
+        letterPage.clickInboxLettersFolder();
+        return inboxPage = new IncomingEmailsPage(driver);
+    }
+
+    clickDraftsFolderService() {
+        letterPage.clickDraftsFolder();
+        return draft = new DraftsPage(driver);
+    }
+
+    clickDeletedLettersFolderService() {
+        draft.clickDeletedLettersFolder();
+        return deletedLetters = new DeletedLettersPage(driver);
+    }
+
+    async getTopicSentLetterService() {
+        return await sentPage.getTopicLetter();
+    }
+
+
 
 
 

@@ -20,9 +20,9 @@ describe("LoginPage page tests", function () {
         await service.openBrowserLetterPage();
     });
 
-    // after(function () {
-    //     service.quit();
-    // });
+    after(function () {
+        service.quit();
+    });
 
     it("Page check", async function () {
         let heading = await service.getHeadingTextLetterPage();
@@ -35,11 +35,13 @@ describe("LoginPage page tests", function () {
         assert.equal(heading, EXPECTED_HEADING_SENT_MESSAGE_WINDOW_PAGE, "The expected page title does not match the current one.");
     });
 
-    // it("Test with an invalid login", async function () {
-    //     service.invalidLoginCreation(user.invalidLogin);
-    //     let errorLogin = await service.getErrorTextLogin();
-    //     assert.equal(errorLogin, EXPECTED_ERROR_TEXT_LOGIN, "A test with an incorrect login behaves incorrectly.");
-    // });
+
+
+    it("Check Sent emails", async function () {
+        await service.clickSendLettersFolderService();
+        let topic = await service.getTopicSentLetterService();
+        assert.equal(topic, EXPECTED_TOPIC_SENT_LETTER, "The expected page title does not match the current one.");
+    });
 
     // it("Correct Login Test", async function () {
     //     await service.logIn(user.correctLogin);

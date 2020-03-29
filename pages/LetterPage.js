@@ -29,7 +29,6 @@ let Page = class LetterPage extends BasePage {
     }
 
     findBodyField() {
-        console.log(6666);
         return this.find(BODY_FIELD_LOCATOR);
     }
 
