@@ -11,8 +11,8 @@ const HEADING_LOCATOR = "//a[contains(@title,'Черновики')]/span",
 
 let Page = class DraftsPage extends BasePage {
 
-    markLetter() {
-        return this.find(FLAG_LOCATOR).click();
+    async markLetter() {
+        return await this.find(FLAG_LOCATOR).click();
     }
 
     clickDeleteButton() {
@@ -20,7 +20,7 @@ let Page = class DraftsPage extends BasePage {
     }
 
     findTopicLetter() {
-        return this.find(TOPIC_LETTER_LOCATOR);
+        return this.findAll(TOPIC_LETTER_LOCATOR);
     }
 
     clickDeletedLettersFolder() {
@@ -34,7 +34,6 @@ let Page = class DraftsPage extends BasePage {
     getTopicLetter() {
         return this.find(TOPIC_LETTER_LOCATOR).getText();
     }
-
 };
 
 module.exports = Page;

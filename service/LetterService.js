@@ -141,5 +141,15 @@ let Page = class LetterService extends servicePage {
         return letterPage.getErrorAddressText();
     }
 
+    async deleteDraftLetter() {
+        await draft.markLetter();
+        await draft.clickDeleteButton();
+        await draft.sleep(1000);
+    }
+
+    async findTopicDraftLetterService() {
+        return await draft.findTopicLetter();
+    }
+
 }
 module.exports = Page;

@@ -28,7 +28,6 @@ let Page = class BasePage {
     }
 
     findAll(element) {
-        this.driver.wait(until.elementLocated(By.xpath(element)), 1000);
         return this.driver.findElements(By.xpath(element));
     }
 
