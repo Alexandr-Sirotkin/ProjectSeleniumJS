@@ -1,11 +1,11 @@
 
 let user = {
 
-    "correctLogin": "sirotkintest",
+    "correctLogin": "aleksandarsirotk1n",
     "invalidLogin": "999999999",
-    "correctPassword": "arcanum1989",
+    "correctPassword": "arcanum13",
     "invalidPassword": "123456",
-    "emailAddress": "sirotkintest@yandex.by",
+    "emailAddress": "aleksandarsirotk1n@yandex.by",
     "userName": "Александр Сироткин",
 
 }
