@@ -46,6 +46,13 @@ let Page = class LetterService extends servicePage {
         await this.clickDraftsFolderService();
     }
 
+    async openBrowserDeletedLettersPage() {
+        await this.openBrowserDraftsPage();
+        await this.refreshDraftsPage(letter.topicTestLetter);
+        await this.deleteDraftLetter();
+        await this.clickDeletedLettersFolderService();
+    }
+
     async writeRecipientService(recipient) {
         let recipientField = await letterPage.findRecipientField();
         recipientField.clear();
@@ -87,6 +94,10 @@ let Page = class LetterService extends servicePage {
         return draft.getHeadingText();
     }
 
+    getHeadingTextDeletedLettersPage() {
+        return deletedLetters.getHeadingText();
+    }
+
     async clickSendLettersFolderService() {
         await letterPage.clickSendLettersFolder();
         return sentPage = new SentEmailsPage(driver);
@@ -103,8 +114,8 @@ let Page = class LetterService extends servicePage {
         return draft = new DraftsPage(driver);
     }
 
-    clickDeletedLettersFolderService() {
-        draft.clickDeletedLettersFolder();
+    async clickDeletedLettersFolderService() {
+        await draft.clickDeletedLettersFolder();
         return deletedLetters = new DeletedLettersPage(driver);
     }
 
@@ -120,6 +131,10 @@ let Page = class LetterService extends servicePage {
         return await draft.getTopicLetter();
     }
 
+    async getTopicLetterDeletedLettersService() {
+        return await deletedLetters.getTopicLetter();
+    }
+
     async getTopicLetterLocator() {
         return await inboxPage.getTopicLetterLocator();
     }
@@ -130,6 +145,10 @@ let Page = class LetterService extends servicePage {
 
     async refreshDraftsPage(element) {
         await draft.refresh("//span[@title=\'" + element + "\']");
+    }
+
+    async refreshDeletedLettersPage(element) {
+        await deletedLetters.refresh("//span[@title=\'" + element + "\']");
     }
 
     async writeLetterFromInbox() {
@@ -147,8 +166,18 @@ let Page = class LetterService extends servicePage {
         await draft.sleep(1000);
     }
 
+    async deleteDeletedLetter() {
+        await deletedLetters.markLetter();
+        await deletedLetters.clickDeleteButton();
+        await deletedLetters.sleep(1000);
+    }
+
     async findTopicDraftLetterService() {
         return await draft.findTopicLetter();
+    }
+
+    async findTopicDeletedLetterService() {
+        return await deletedLetters.findTopicLetter();
     }
 
 }
