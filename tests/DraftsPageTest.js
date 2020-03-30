@@ -18,7 +18,8 @@ describe("DraftsPage page tests", function () {
         await service.refreshDraftsPage(letter.topicTestLetter);
     });
 
-    after(function () {
+    after(async function () {
+        await service.clearService();
         service.quit();
     });
 

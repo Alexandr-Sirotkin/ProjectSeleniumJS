@@ -5,7 +5,7 @@
   "main": "driver.js",
   "scripts": {
     "start": "node index",
-    "test": ""
+    "test": "mocha tests/LoginPageTest.js && mocha tests/PasswordPageTest.js && mocha tests/LetterPageTest.js && mocha tests/DraftsPageTest.js && mocha tests/DeletedLettersPageTest.js"
   },
   "author": "Sirotkin Alexandr",
   "license": "ISC",

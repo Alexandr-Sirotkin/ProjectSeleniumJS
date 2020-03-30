@@ -9,7 +9,6 @@ const EXPECTED_HEADING = "Удалённые",
     EXPECTED_COUNT_ELEMENTS = 0,
     EXPECTED_TOPIC_DELETE_LETTER = letter.topicTestLetter;
 
-
 describe("DeletedLettersPage page tests", function () {
     this.timeout(35000);
 
@@ -18,7 +17,8 @@ describe("DeletedLettersPage page tests", function () {
         await service.refreshDeletedLettersPage(letter.topicTestLetter);
     });
 
-    after(function () {
+    after(async function () {
+        await service.clearService();
         service.quit();
     });
 

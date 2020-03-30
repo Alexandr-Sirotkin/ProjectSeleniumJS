@@ -2,8 +2,9 @@
 "use strict";
 
 let user = require("../model/user.js");
-let servicePage = require("../service/TransitionService.js");
-let service = new servicePage();
+let ServicePage = require("../service/TransitionService.js");
+let service = new ServicePage();
+
 let assert = require("assert");
 
 const EXPECTED_HEADING_LOGIN_PAGE = "logo:yandex",
@@ -18,8 +19,8 @@ describe("LoginPage page tests", function () {
         service.openBrowserForLoginPage();
     });
 
-    after(function () {
-        service.quit();
+    after(async function () {
+        await service.quit();
     });
 
     it("Page check", async function () {

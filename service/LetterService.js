@@ -1,19 +1,10 @@
 "use strict";
-let webdriver = require('selenium-webdriver');
-let Key = require('selenium-webdriver').Key;
+
 let driver = require("../model/driver.js");
+let By = require('selenium-webdriver').By;
 let user = require("../model/user.js");
 let letter = require("../model/letter.js");
 let servicePage = require("./TransitionService.js");
-let service = new servicePage();
-let LogPage = require("../pages/LoginPage.js");
-let loginPage;
-let PasPage = require("../pages/PasswordPage.js");
-let passwordPage;
-let UmmPage = require("../pages/UserMailMainPage.js");
-let ummPage;
-let MailPage = require("../pages/MailPage.js");
-let mailPage;
 let LetterPage = require("../pages/LetterPage.js");
 let letterPage;
 let SentMessageWindowPage = require("../pages/SentMessageWindowPage.js");
@@ -26,10 +17,12 @@ let DeletedLettersPage = require("../pages/DeletedLettersPage.js");
 let deletedLetters;
 let DraftsPage = require("../pages/DraftsPage.js");
 let draft;
-
-
-
-
+let LINK_TO_SENT_LOCATOR = "//a[contains(@title,'Отправленные')]",
+    LINK_TO_INBOX_LOCATOR = "//a[contains(@title,'Входящие')]",
+    LINK_TO_DRAFTS_LOCATOR = "//a[contains(@title,'Черновики')]",
+    LINK_TO_DELETED_LOCATOR = "//a[contains(@title,'Удалённые')]",
+    FLAG_LOCATOR = "//div[contains(@class,'ns-view-messages-item-wrap')]//span[@class='_nb-checkbox-flag _nb-checkbox-normal-flag']",
+    DELETE_BUTTON = "//div[@title='Удалить (Delete)']";
 
 let Page = class LetterService extends servicePage {
 
@@ -178,6 +171,53 @@ let Page = class LetterService extends servicePage {
 
     async findTopicDeletedLetterService() {
         return await deletedLetters.findTopicLetter();
+    }
+
+    async clearService() {
+        await driver.findElement(By.xpath(LINK_TO_INBOX_LOCATOR)).click();
+        let elementInbox = await driver.findElements(By.xpath(FLAG_LOCATOR));
+        for (let i = 1; i < (elementInbox.length + 1); i++) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            let elementLocator = By.xpath(
+                "//div[contains(@class,'ns-view-messages-item-wrap')]" + "[" + i + "]"
+                + "//span[@class='_nb-checkbox-flag _nb-checkbox-normal-flag']");
+            await driver.findElement(elementLocator).click();
+        }
+        await driver.findElement(By.xpath(DELETE_BUTTON)).click();
+
+        await driver.findElement(By.xpath(LINK_TO_SENT_LOCATOR)).click();
+        let elementSent = await driver.findElements(By.xpath(FLAG_LOCATOR));
+        for (let i = 1; i < (elementSent.length + 1); i++) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            let elementLocator = By.xpath(
+                "//div[contains(@class,'ns-view-messages-item-wrap')]" + "[" + i + "]"
+                + "//span[@class='_nb-checkbox-flag _nb-checkbox-normal-flag']");
+            await driver.findElement(elementLocator).click();
+        }
+        await driver.findElement(By.xpath(DELETE_BUTTON)).click();
+
+        await driver.findElement(By.xpath(LINK_TO_DRAFTS_LOCATOR)).click();
+        let elementDrafts = await driver.findElements(By.xpath(FLAG_LOCATOR));
+        for (let i = 1; i < (elementDrafts.length + 1); i++) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            let elementLocator = By.xpath(
+                "//div[contains(@class,'ns-view-messages-item-wrap')]" + "[" + i + "]"
+                + "//span[@class='_nb-checkbox-flag _nb-checkbox-normal-flag']");
+            await driver.findElement(elementLocator).click();
+        }
+        await driver.findElement(By.xpath(DELETE_BUTTON)).click();
+
+        await driver.findElement(By.xpath(LINK_TO_DELETED_LOCATOR)).click();
+        let elementDeleted = await driver.findElements(By.xpath(FLAG_LOCATOR));
+        for (let i = 1; i < (elementDeleted.length + 1); i++) {
+            await new Promise(resolve => setTimeout(resolve, 1000));
+            let elementLocator = By.xpath(
+                "//div[contains(@class,'ns-view-messages-item-wrap')]" + "[" + i + "]"
+                + "//span[@class='_nb-checkbox-flag _nb-checkbox-normal-flag']");
+            await driver.findElement(elementLocator).click();
+        }
+        await driver.findElement(By.xpath(DELETE_BUTTON)).click();
+
     }
 
 }

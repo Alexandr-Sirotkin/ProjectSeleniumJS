@@ -7,7 +7,6 @@ const HEADING_LOCATOR = "//a[contains(@title,'Удалённые')]/span",
     DELETE_BUTTON = "//div[@title='Удалить (Delete)']",
     TOPIC_LETTER_LOCATOR = "//span[@title=\'" + letter.topicTestLetter + "\']";
 
-
 let Page = class DeletedLettersPage extends BasePage {
 
     markLetter() {

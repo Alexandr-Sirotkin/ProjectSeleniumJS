@@ -1,8 +1,9 @@
 "use strict";
 
 let user = require("../model/user.js");
-let servicePage = require("../service/TransitionService.js");
-let service = new servicePage();
+let ServicePage = require("../service/TransitionService.js");
+let service = new ServicePage();
+
 let assert = require("assert");
 
 const EXPECTED_HEADING_USER_MAIL_MAIN_PAGE = "Сироткин",

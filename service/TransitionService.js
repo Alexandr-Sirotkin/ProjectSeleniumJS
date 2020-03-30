@@ -45,8 +45,6 @@ let Page = class ServicePage {
     invalidLoginCreation(text) {
         let field = loginPage.findLoginField();
         field.clear();
-        // field.sendKeys(webdriver.Key.CONTROL, Key.HOME);
-        // field.sendKeys(webdriver.Key.CONTROL, Key.SHIFT, Key.END);
         field.sendKeys(text);
         loginPage.clickLogInButton();
     }

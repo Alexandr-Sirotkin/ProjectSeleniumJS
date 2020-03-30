@@ -7,8 +7,6 @@ let assert = require("assert");
 
 const EXPECTED_HEADING_LETTER_PAGE = "Отправить",
     EXPECTED_HEADING_SENT_MESSAGE_WINDOW_PAGE = "Письмо отправлено.",
-    EXPECTED_ADDRESS_SENT_LETTER = user.emailAddress,
-    EXPECTED_USER_INCOMING_LETTER = user.userName,
     EXPECTED_TOPIC_SENT_LETTER = letter.topicCorrectRecipient,
     EXPECTED_TOPIC_INCOMING_LETTER = letter.topicCorrectRecipient,
     EXPECTED_ERROR_ADDRESS_TEXT = "Некорректные адреса: " + letter.invalidRecipient;
