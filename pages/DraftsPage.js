@@ -31,6 +31,10 @@ let Page = class DraftsPage extends BasePage {
         return this.find(HEADING_LOCATOR).getText();
     }
 
+    getTopicLetter() {
+        return this.find(TOPIC_LETTER_LOCATOR).getText();
+    }
+
 };
 
 module.exports = Page;

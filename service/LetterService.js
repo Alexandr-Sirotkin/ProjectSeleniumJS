@@ -3,6 +3,7 @@ let webdriver = require('selenium-webdriver');
 let Key = require('selenium-webdriver').Key;
 let driver = require("../model/driver.js");
 let user = require("../model/user.js");
+let letter = require("../model/letter.js");
 let servicePage = require("./TransitionService.js");
 let service = new servicePage();
 let LogPage = require("../pages/LoginPage.js");
@@ -35,6 +36,14 @@ let Page = class LetterService extends servicePage {
     async openBrowserLetterPage() {
         await this.openBrowserForMailPage();
         letterPage = await this.writeLetter();
+    }
+
+    async openBrowserDraftsPage() {
+        await this.openBrowserLetterPage();
+        await this.writeRecipientService(user.emailAddress);
+        await this.writeTopicService(letter.topicTestLetter);
+        await this.writeBodyService(letter.bodyTestLetter);
+        await this.clickDraftsFolderService();
     }
 
     async writeRecipientService(recipient) {
@@ -74,6 +83,10 @@ let Page = class LetterService extends servicePage {
         return smwPage.getHeadingText();
     }
 
+    getHeadingTextDraftsPage() {
+        return draft.getHeadingText();
+    }
+
     async clickSendLettersFolderService() {
         await letterPage.clickSendLettersFolder();
         return sentPage = new SentEmailsPage(driver);
@@ -84,8 +97,9 @@ let Page = class LetterService extends servicePage {
         return inboxPage = new IncomingEmailsPage(driver);
     }
 
-    clickDraftsFolderService() {
-        letterPage.clickDraftsFolder();
+    async clickDraftsFolderService() {
+        await letterPage.clickDraftsFolder();
+        await letterPage.findWindow();
         return draft = new DraftsPage(driver);
     }
 
@@ -102,12 +116,20 @@ let Page = class LetterService extends servicePage {
         return await inboxPage.getTopicLetter();
     }
 
+    async getTopicLetterDraftService() {
+        return await draft.getTopicLetter();
+    }
+
     async getTopicLetterLocator() {
         return await inboxPage.getTopicLetterLocator();
     }
 
     async refreshInboxPage(element) {
         await inboxPage.refresh("//span[@title=\'" + element + "\']");
+    }
+
+    async refreshDraftsPage(element) {
+        await draft.refresh("//span[@title=\'" + element + "\']");
     }
 
     async writeLetterFromInbox() {

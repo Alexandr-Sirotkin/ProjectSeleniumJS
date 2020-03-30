@@ -13,7 +13,7 @@ const EXPECTED_HEADING_LETTER_PAGE = "Отправить",
     EXPECTED_TOPIC_INCOMING_LETTER = letter.topicCorrectRecipient,
     EXPECTED_ERROR_ADDRESS_TEXT = "Некорректные адреса: " + letter.invalidRecipient;
 
-describe("LoginPage page tests", function () {
+describe("LetterPage page tests", function () {
     this.timeout(25000);
 
     before(async function () {

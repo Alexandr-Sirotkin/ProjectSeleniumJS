@@ -37,15 +37,14 @@ let Page = class BasePage {
         return this.find(element).sendKeys(text);
     }
 
-    refresh(element) {
+    async refresh(element) {
         let displayed = false;
         let count = 0;
         do {
             try {
-                // displayed = this.find(element);
-                displayed = this.driver.findElement(By.xpath(element));
+                displayed = await this.driver.findElement(By.xpath(element));
             } catch (err) {
-                this.driver.navigate().refresh();
+                await this.driver.navigate().refresh();
                 if (count > 6) {
                     displayed = true;
                 }

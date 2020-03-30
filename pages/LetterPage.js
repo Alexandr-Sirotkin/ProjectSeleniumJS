@@ -56,6 +56,13 @@ let Page = class LetterPage extends BasePage {
         this.find(WRITE_BUTTON_LOCATOR).click();
     }
 
+    async findWindow() {
+        let displayed = await this.find(SAVE_AND_GO_BUTTON_LOCATOR).isDisplayed();
+        if (displayed) {
+            await this.find(SAVE_AND_GO_BUTTON_LOCATOR).click();
+        }
+    }
+
 };
 
 module.exports = Page;
